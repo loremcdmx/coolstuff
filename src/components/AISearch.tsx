@@ -30,13 +30,7 @@ export default function AISearch() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20 rounded-2xl p-6">
-      <h3 className="text-lg font-semibold text-amber-500 dark:text-amber-400 mb-3">
-        {t(lang, "aiSearchTitle")}
-      </h3>
-      <p className="text-zinc-500 dark:text-zinc-400 text-sm mb-4">
-        {t(lang, "aiSearchDesc")}
-      </p>
+    <div>
       <div className="flex gap-2">
         <input
           type="text"
@@ -44,18 +38,18 @@ export default function AISearch() {
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSearch()}
           placeholder={t(lang, "aiSearchPlaceholder")}
-          className="flex-1 bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:border-amber-500 transition-colors"
+          className="flex-1 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-600 transition-colors"
         />
         <button
           onClick={handleSearch}
           disabled={loading}
-          className="px-6 py-3 bg-amber-500 hover:bg-amber-600 disabled:bg-amber-500/50 text-black font-semibold rounded-xl transition-colors"
+          className="px-4 py-2 bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-700 dark:hover:bg-zinc-300 disabled:opacity-40 text-white dark:text-zinc-900 text-sm font-medium rounded-lg transition-colors"
         >
           {loading ? "..." : t(lang, "aiSearchButton")}
         </button>
       </div>
       {result && (
-        <div className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-900/80 rounded-xl text-zinc-700 dark:text-zinc-300 text-sm whitespace-pre-wrap leading-relaxed">
+        <div className="mt-3 p-3 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg text-sm text-zinc-700 dark:text-zinc-300 whitespace-pre-wrap leading-relaxed">
           {result}
         </div>
       )}
