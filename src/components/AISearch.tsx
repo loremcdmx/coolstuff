@@ -38,18 +38,45 @@ export default function AISearch() {
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSearch()}
           placeholder={t(lang, "aiSearchPlaceholder")}
-          className="flex-1 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-600 transition-colors"
+          className="flex-1 px-3 py-2 text-sm transition-colors"
+          style={{
+            background: "var(--color-surface)",
+            border: "1px solid var(--color-border)",
+            borderRadius: "var(--radius-card)",
+            color: "var(--color-text)",
+            outline: "none",
+          }}
+          onFocus={(e) =>
+            (e.currentTarget.style.borderColor = "var(--color-border-strong)")
+          }
+          onBlur={(e) =>
+            (e.currentTarget.style.borderColor = "var(--color-border)")
+          }
         />
         <button
           onClick={handleSearch}
           disabled={loading}
-          className="px-4 py-2 bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-700 dark:hover:bg-zinc-300 disabled:opacity-40 text-white dark:text-zinc-900 text-sm font-medium rounded-lg transition-colors"
+          className="px-4 py-2 text-sm font-medium transition-opacity disabled:opacity-40"
+          style={{
+            background: "var(--color-text)",
+            color: "var(--color-bg)",
+            borderRadius: "var(--radius-card)",
+          }}
         >
           {loading ? "..." : t(lang, "aiSearchButton")}
         </button>
       </div>
       {result && (
-        <div className="mt-3 p-3 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg text-sm text-zinc-700 dark:text-zinc-300 whitespace-pre-wrap leading-relaxed">
+        <div
+          className="mt-3 p-3 text-sm leading-relaxed whitespace-pre-wrap"
+          style={{
+            background: "var(--color-surface-hover)",
+            border: "1px solid var(--color-border)",
+            borderRadius: "var(--radius-card)",
+            color: "var(--color-text-secondary)",
+            fontFamily: "var(--font-serif)",
+          }}
+        >
           {result}
         </div>
       )}

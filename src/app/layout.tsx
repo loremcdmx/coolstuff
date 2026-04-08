@@ -1,22 +1,30 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk, Source_Serif_4, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const grotesk = Space_Grotesk({
+  variable: "--font-grotesk",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const serif = Source_Serif_4({
+  variable: "--font-serif",
   subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
+
+const mono = IBM_Plex_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: "CoolStuff - All trends in one place",
+  title: "coolstuff — all trends, one place",
   description:
-    "Discover trending products, movies, series and music. All the best stuff in one place.",
+    "Trending products, movies, series and music. Curated, not computed.",
 };
 
 export default function RootLayout({
@@ -27,9 +35,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${grotesk.variable} ${serif.variable} ${mono.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
+      <body
+        className="min-h-full flex flex-col"
+        style={{ fontFamily: "var(--font-grotesk), system-ui, sans-serif" }}
+      >
         <Providers>{children}</Providers>
       </body>
     </html>

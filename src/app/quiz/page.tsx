@@ -2,35 +2,42 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useApp } from "../providers";
-import { t } from "@/data/i18n";
 import { getProfile, saveProfile } from "@/lib/profile";
 
 const interestOptions = [
-  { id: "tech", label: "Tech & Gadgets", icon: "laptop" },
-  { id: "fashion", label: "Fashion & Style", icon: "shirt" },
-  { id: "beauty", label: "Beauty & Skincare", icon: "sparkles" },
-  { id: "home", label: "Home & Living", icon: "home" },
-  { id: "kitchen", label: "Kitchen & Cooking", icon: "chef" },
-  { id: "sports", label: "Sports & Fitness", icon: "dumbbell" },
-  { id: "gaming", label: "Gaming", icon: "gamepad" },
-  { id: "books", label: "Books & Reading", icon: "book" },
-  { id: "pets", label: "Pets", icon: "paw" },
+  "Tech & Gadgets",
+  "Fashion & Style",
+  "Beauty & Skincare",
+  "Home & Living",
+  "Kitchen & Cooking",
+  "Sports & Fitness",
+  "Gaming",
+  "Books & Reading",
+  "Pets",
+];
+
+const interestIds = [
+  "tech", "fashion", "beauty", "home", "kitchen", "sports", "gaming", "books", "pets",
 ];
 
 const entertainmentOptions = [
-  { id: "action", label: "Action & Thriller" },
-  { id: "comedy", label: "Comedy" },
-  { id: "drama", label: "Drama" },
-  { id: "scifi", label: "Sci-Fi & Fantasy" },
-  { id: "horror", label: "Horror" },
-  { id: "documentary", label: "Documentary" },
-  { id: "anime", label: "Anime" },
-  { id: "kpop", label: "K-Pop & K-Drama" },
-  { id: "hiphop", label: "Hip-Hop & R&B" },
-  { id: "latin", label: "Latin Music" },
-  { id: "rock", label: "Rock & Indie" },
-  { id: "pop", label: "Pop" },
+  "Action & Thriller",
+  "Comedy",
+  "Drama",
+  "Sci-Fi & Fantasy",
+  "Horror",
+  "Documentary",
+  "Anime",
+  "K-Pop & K-Drama",
+  "Hip-Hop & R&B",
+  "Latin Music",
+  "Rock & Indie",
+  "Pop",
+];
+
+const entertainmentIds = [
+  "action", "comedy", "drama", "scifi", "horror", "documentary",
+  "anime", "kpop", "hiphop", "latin", "rock", "pop",
 ];
 
 const priceOptions = [
@@ -40,23 +47,16 @@ const priceOptions = [
 ];
 
 export default function QuizPage() {
-  const { lang } = useApp();
   const router = useRouter();
   const [step, setStep] = useState(0);
   const [interests, setInterests] = useState<string[]>([]);
   const [entertainment, setEntertainment] = useState<string[]>([]);
-  const [priceRange, setPriceRange] = useState<"budget" | "mid" | "premium" | "">("");
+  const [priceRange, setPriceRange] = useState<
+    "budget" | "mid" | "premium" | ""
+  >("");
 
-  const toggleInterest = (id: string) => {
-    setInterests((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
-    );
-  };
-
-  const toggleEntertainment = (id: string) => {
-    setEntertainment((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
-    );
+  const toggle = (arr: string[], id: string, set: (v: string[]) => void) => {
+    set(arr.includes(id) ? arr.filter((x) => x !== id) : [...arr, id]);
   };
 
   const finish = () => {
@@ -70,47 +70,80 @@ export default function QuizPage() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex items-center justify-center p-4">
-      <div className="w-full max-w-lg">
+    <div
+      className="min-h-screen flex items-center justify-center p-4"
+      style={{ background: "var(--color-bg)" }}
+    >
+      <div className="w-full max-w-md">
         {/* Progress */}
-        <div className="flex gap-1 mb-8">
+        <div className="flex gap-1 mb-10">
           {[0, 1, 2].map((i) => (
             <div
               key={i}
-              className={`h-1 flex-1 rounded-full transition-colors ${
-                i <= step ? "bg-amber-500" : "bg-zinc-800"
-              }`}
+              className="h-0.5 flex-1"
+              style={{
+                background:
+                  i <= step ? "var(--color-accent)" : "var(--color-border)",
+              }}
             />
           ))}
         </div>
 
+        <p
+          className="text-[10px] uppercase tracking-[0.2em] mb-4"
+          style={{
+            color: "var(--color-text-tertiary)",
+            fontFamily: "var(--font-mono)",
+          }}
+        >
+          {String(step + 1).padStart(2, "0")} / 03
+        </p>
+
         {step === 0 && (
           <div>
-            <h1 className="text-2xl font-bold text-white mb-2">
+            <h1
+              className="text-2xl font-bold tracking-tight mb-1"
+            >
               What are you into?
             </h1>
-            <p className="text-zinc-400 mb-6 text-sm">
-              Pick everything that interests you. We'll use this to personalize your feed.
+            <p
+              className="text-sm mb-6"
+              style={{ color: "var(--color-text-secondary)" }}
+            >
+              Pick everything that interests you.
             </p>
-            <div className="grid grid-cols-3 gap-2">
-              {interestOptions.map((opt) => (
+            <div className="grid grid-cols-3 gap-1.5">
+              {interestOptions.map((opt, i) => (
                 <button
-                  key={opt.id}
-                  onClick={() => toggleInterest(opt.id)}
-                  className={`p-3 rounded-xl text-sm font-medium text-center transition-all border ${
-                    interests.includes(opt.id)
-                      ? "bg-amber-500/15 border-amber-500 text-amber-400"
-                      : "bg-zinc-900 border-zinc-800 text-zinc-400 hover:border-zinc-600"
-                  }`}
+                  key={interestIds[i]}
+                  onClick={() =>
+                    toggle(interests, interestIds[i], setInterests)
+                  }
+                  className="p-2.5 text-xs font-medium text-center transition-all"
+                  style={{
+                    border: `1px solid ${interests.includes(interestIds[i]) ? "var(--color-accent)" : "var(--color-border)"}`,
+                    background: interests.includes(interestIds[i])
+                      ? "var(--color-accent-subtle)"
+                      : "var(--color-surface)",
+                    color: interests.includes(interestIds[i])
+                      ? "var(--color-accent)"
+                      : "var(--color-text-secondary)",
+                    borderRadius: "var(--radius-card)",
+                  }}
                 >
-                  {opt.label}
+                  {opt}
                 </button>
               ))}
             </div>
             <button
               onClick={() => setStep(1)}
               disabled={interests.length === 0}
-              className="w-full mt-6 py-3 bg-amber-500 hover:bg-amber-600 disabled:opacity-30 disabled:cursor-not-allowed text-black font-semibold rounded-xl transition-colors"
+              className="w-full mt-6 py-2.5 text-sm font-medium disabled:opacity-30 transition-opacity"
+              style={{
+                background: "var(--color-text)",
+                color: "var(--color-bg)",
+                borderRadius: "var(--radius-card)",
+              }}
             >
               Next
             </button>
@@ -119,38 +152,63 @@ export default function QuizPage() {
 
         {step === 1 && (
           <div>
-            <h1 className="text-2xl font-bold text-white mb-2">
+            <h1 className="text-2xl font-bold tracking-tight mb-1">
               Entertainment taste
             </h1>
-            <p className="text-zinc-400 mb-6 text-sm">
-              What kind of movies, series, and music do you enjoy?
+            <p
+              className="text-sm mb-6"
+              style={{ color: "var(--color-text-secondary)" }}
+            >
+              Movies, series, music — what do you enjoy?
             </p>
-            <div className="grid grid-cols-3 gap-2">
-              {entertainmentOptions.map((opt) => (
+            <div className="grid grid-cols-3 gap-1.5">
+              {entertainmentOptions.map((opt, i) => (
                 <button
-                  key={opt.id}
-                  onClick={() => toggleEntertainment(opt.id)}
-                  className={`p-3 rounded-xl text-sm font-medium text-center transition-all border ${
-                    entertainment.includes(opt.id)
-                      ? "bg-purple-500/15 border-purple-500 text-purple-400"
-                      : "bg-zinc-900 border-zinc-800 text-zinc-400 hover:border-zinc-600"
-                  }`}
+                  key={entertainmentIds[i]}
+                  onClick={() =>
+                    toggle(
+                      entertainment,
+                      entertainmentIds[i],
+                      setEntertainment
+                    )
+                  }
+                  className="p-2.5 text-xs font-medium text-center transition-all"
+                  style={{
+                    border: `1px solid ${entertainment.includes(entertainmentIds[i]) ? "var(--color-accent)" : "var(--color-border)"}`,
+                    background: entertainment.includes(entertainmentIds[i])
+                      ? "var(--color-accent-subtle)"
+                      : "var(--color-surface)",
+                    color: entertainment.includes(entertainmentIds[i])
+                      ? "var(--color-accent)"
+                      : "var(--color-text-secondary)",
+                    borderRadius: "var(--radius-card)",
+                  }}
                 >
-                  {opt.label}
+                  {opt}
                 </button>
               ))}
             </div>
             <div className="flex gap-2 mt-6">
               <button
                 onClick={() => setStep(0)}
-                className="px-6 py-3 bg-zinc-800 text-zinc-300 font-medium rounded-xl"
+                className="px-5 py-2.5 text-sm font-medium"
+                style={{
+                  border: "1px solid var(--color-border)",
+                  color: "var(--color-text-secondary)",
+                  borderRadius: "var(--radius-card)",
+                }}
               >
                 Back
               </button>
               <button
                 onClick={() => setStep(2)}
                 disabled={entertainment.length === 0}
-                className="flex-1 py-3 bg-amber-500 hover:bg-amber-600 disabled:opacity-30 disabled:cursor-not-allowed text-black font-semibold rounded-xl transition-colors"
+                className="flex-1 py-2.5 text-sm font-medium disabled:opacity-30 transition-opacity"
+                style={{
+                  background: "var(--color-text)",
+                  color: "var(--color-bg)",
+                  borderRadius: "var(--radius-card)",
+                }}
               >
                 Next
               </button>
@@ -160,41 +218,73 @@ export default function QuizPage() {
 
         {step === 2 && (
           <div>
-            <h1 className="text-2xl font-bold text-white mb-2">
+            <h1 className="text-2xl font-bold tracking-tight mb-1">
               Budget preference
             </h1>
-            <p className="text-zinc-400 mb-6 text-sm">
-              What's your typical spending range for purchases?
+            <p
+              className="text-sm mb-6"
+              style={{ color: "var(--color-text-secondary)" }}
+            >
+              What&apos;s your typical spending range?
             </p>
-            <div className="grid gap-2">
+            <div className="grid gap-1.5">
               {priceOptions.map((opt) => (
                 <button
                   key={opt.id}
-                  onClick={() => setPriceRange(opt.id as typeof priceRange)}
-                  className={`p-4 rounded-xl text-left transition-all border ${
-                    priceRange === opt.id
-                      ? "bg-amber-500/15 border-amber-500"
-                      : "bg-zinc-900 border-zinc-800 hover:border-zinc-600"
-                  }`}
+                  onClick={() =>
+                    setPriceRange(opt.id as typeof priceRange)
+                  }
+                  className="p-3 text-left transition-all"
+                  style={{
+                    border: `1px solid ${priceRange === opt.id ? "var(--color-accent)" : "var(--color-border)"}`,
+                    background:
+                      priceRange === opt.id
+                        ? "var(--color-accent-subtle)"
+                        : "var(--color-surface)",
+                    borderRadius: "var(--radius-card)",
+                  }}
                 >
-                  <span className={`font-semibold text-sm ${priceRange === opt.id ? "text-amber-400" : "text-white"}`}>
+                  <span
+                    className="text-sm font-medium"
+                    style={{
+                      color:
+                        priceRange === opt.id
+                          ? "var(--color-accent)"
+                          : "var(--color-text)",
+                    }}
+                  >
                     {opt.label}
                   </span>
-                  <p className="text-xs text-zinc-500 mt-0.5">{opt.desc}</p>
+                  <p
+                    className="text-xs mt-0.5"
+                    style={{ color: "var(--color-text-tertiary)" }}
+                  >
+                    {opt.desc}
+                  </p>
                 </button>
               ))}
             </div>
             <div className="flex gap-2 mt-6">
               <button
                 onClick={() => setStep(1)}
-                className="px-6 py-3 bg-zinc-800 text-zinc-300 font-medium rounded-xl"
+                className="px-5 py-2.5 text-sm font-medium"
+                style={{
+                  border: "1px solid var(--color-border)",
+                  color: "var(--color-text-secondary)",
+                  borderRadius: "var(--radius-card)",
+                }}
               >
                 Back
               </button>
               <button
                 onClick={finish}
                 disabled={!priceRange}
-                className="flex-1 py-3 bg-amber-500 hover:bg-amber-600 disabled:opacity-30 disabled:cursor-not-allowed text-black font-semibold rounded-xl transition-colors"
+                className="flex-1 py-2.5 text-sm font-medium disabled:opacity-30 transition-opacity"
+                style={{
+                  background: "var(--color-accent)",
+                  color: "#fff",
+                  borderRadius: "var(--radius-card)",
+                }}
               >
                 See my recommendations
               </button>
@@ -204,7 +294,8 @@ export default function QuizPage() {
 
         <button
           onClick={() => router.push("/")}
-          className="w-full mt-4 text-center text-xs text-zinc-600 hover:text-zinc-400"
+          className="w-full mt-4 text-center text-xs transition-colors"
+          style={{ color: "var(--color-text-tertiary)" }}
         >
           Skip for now
         </button>

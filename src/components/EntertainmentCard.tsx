@@ -4,57 +4,121 @@ import { Movie, Song } from "@/data/entertainment";
 import { useApp } from "@/app/providers";
 import { t } from "@/data/i18n";
 
-export function MovieCard({ item }: { item: Movie }) {
+export function MovieCard({
+  item,
+  index = 0,
+}: {
+  item: Movie;
+  index?: number;
+}) {
   const { lang } = useApp();
 
   return (
-    <div className="group bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-400 dark:hover:border-zinc-600 transition-all">
-      <div className="relative aspect-[2/3] bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
+    <div
+      className="group animate-fade-up"
+      style={{
+        animationDelay: `${index * 40}ms`,
+        borderRadius: "var(--radius-card)",
+        overflow: "hidden",
+        border: "1px solid var(--color-border)",
+        background: "var(--color-surface)",
+        transition: "border-color var(--transition-fast)",
+      }}
+      onMouseEnter={(e) =>
+        (e.currentTarget.style.borderColor = "var(--color-border-strong)")
+      }
+      onMouseLeave={(e) =>
+        (e.currentTarget.style.borderColor = "var(--color-border)")
+      }
+    >
+      <div
+        className="relative aspect-[2/3] overflow-hidden"
+        style={{ background: "var(--color-surface-hover)" }}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={item.poster}
           alt={item.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-full object-cover transition-opacity duration-[350ms] group-hover:opacity-90"
         />
-        <div className="absolute top-3 right-3 bg-amber-500 text-black text-xs font-bold px-2 py-1 rounded-full">
-          ★ {item.rating}
-        </div>
-        <div className="absolute top-3 left-3">
-          <span
-            className={`text-xs font-bold px-2 py-1 rounded-full ${
+        <span
+          className="absolute top-2 right-2 text-[10px] font-medium px-1.5 py-0.5"
+          style={{
+            background: "rgba(0,0,0,0.7)",
+            color: "#fff",
+            fontFamily: "var(--font-mono)",
+            borderRadius: "var(--radius-sm)",
+          }}
+        >
+          {item.rating}
+        </span>
+        <span
+          className="absolute top-2 left-2 text-[10px] font-medium uppercase px-1.5 py-0.5"
+          style={{
+            background:
               item.type === "series"
-                ? "bg-purple-500 text-white"
-                : "bg-blue-500 text-white"
-            }`}
-          >
-            {item.type === "series" ? t(lang, "series") : t(lang, "movie")}
-          </span>
-        </div>
+                ? "var(--color-accent)"
+                : "var(--color-text)",
+            color: item.type === "series" ? "#fff" : "var(--color-bg)",
+            fontFamily: "var(--font-mono)",
+            borderRadius: "var(--radius-sm)",
+          }}
+        >
+          {item.type === "series" ? t(lang, "series") : t(lang, "movie")}
+        </span>
       </div>
-      <div className="p-4">
-        <h3 className="font-semibold text-zinc-900 dark:text-white text-sm leading-tight mb-2">
+      <div className="p-3">
+        <h3
+          className="text-sm font-medium leading-snug mb-1.5"
+          style={{ color: "var(--color-text)" }}
+        >
           {item.title}
         </h3>
-        <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-3 line-clamp-2">
+        <p
+          className="text-xs leading-relaxed mb-2 line-clamp-2"
+          style={{ color: "var(--color-text-secondary)" }}
+        >
           {item.description}
         </p>
-        <div className="flex flex-wrap gap-1 mb-3">
+        <div className="flex flex-wrap gap-1 mb-2">
           {item.genre.map((g) => (
             <span
               key={g}
-              className="text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 px-2 py-0.5 rounded-full"
+              className="text-[10px] px-1.5 py-0.5"
+              style={{
+                background: "var(--color-surface-hover)",
+                color: "var(--color-text-secondary)",
+                borderRadius: "var(--radius-sm)",
+                fontFamily: "var(--font-mono)",
+              }}
             >
               {g}
             </span>
           ))}
         </div>
-        <div className="border-t border-zinc-200 dark:border-zinc-800 pt-3">
-          <p className="text-xs text-zinc-500 mb-1">{t(lang, "whereToWatch")}</p>
+        <div
+          className="pt-2"
+          style={{ borderTop: "1px solid var(--color-border)" }}
+        >
+          <p
+            className="text-[10px] uppercase tracking-[0.1em] mb-1"
+            style={{
+              color: "var(--color-text-tertiary)",
+              fontFamily: "var(--font-mono)",
+            }}
+          >
+            {t(lang, "whereToWatch")}
+          </p>
           <div className="flex flex-wrap gap-1">
             {item.whereToWatch.map((w) => (
               <span
                 key={w}
-                className="text-xs bg-amber-500/10 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded-full"
+                className="text-[10px] font-medium px-1.5 py-0.5"
+                style={{
+                  background: "var(--color-accent-subtle)",
+                  color: "var(--color-accent)",
+                  borderRadius: "var(--radius-sm)",
+                }}
               >
                 {w}
               </span>
@@ -72,12 +136,27 @@ export function SongCard({ song, index }: { song: Song; index: number }) {
       href={song.spotifyUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-4 p-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:border-zinc-400 dark:hover:border-zinc-600 transition-all group"
+      className="flex items-center gap-3 py-2.5 px-2 group animate-fade-up transition-colors"
+      style={{
+        animationDelay: `${index * 40}ms`,
+        borderBottom: "1px solid var(--color-border)",
+        borderRadius: 0,
+      }}
+      onMouseEnter={(e) =>
+        (e.currentTarget.style.background = "var(--color-surface-hover)")
+      }
+      onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
     >
-      <span className="text-2xl font-bold text-zinc-300 dark:text-zinc-600 w-8 text-right">
-        {index + 1}
+      <span
+        className="text-sm font-medium w-6 text-right"
+        style={{ color: "var(--color-text-tertiary)", fontFamily: "var(--font-mono)" }}
+      >
+        {String(index + 1).padStart(2, "0")}
       </span>
-      <div className="w-12 h-12 rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-800 shrink-0">
+      <div
+        className="w-10 h-10 overflow-hidden shrink-0"
+        style={{ borderRadius: "var(--radius-sm)", background: "var(--color-surface-hover)" }}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={song.cover}
@@ -86,14 +165,17 @@ export function SongCard({ song, index }: { song: Song; index: number }) {
         />
       </div>
       <div className="flex-1 min-w-0">
-        <h4 className="font-semibold text-zinc-900 dark:text-white text-sm truncate">
+        <h4 className="text-sm font-medium truncate" style={{ color: "var(--color-text)" }}>
           {song.title}
         </h4>
-        <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate">
+        <p className="text-xs truncate" style={{ color: "var(--color-text-secondary)" }}>
           {song.artist}
         </p>
       </div>
-      <span className="text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 px-2 py-1 rounded-full shrink-0">
+      <span
+        className="text-[10px] uppercase tracking-[0.08em] shrink-0"
+        style={{ color: "var(--color-text-tertiary)", fontFamily: "var(--font-mono)" }}
+      >
         {song.genre}
       </span>
     </a>

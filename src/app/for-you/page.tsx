@@ -60,9 +60,7 @@ export default function ForYouPage() {
       .filter((p) => p.country === country || p.country === "both")
       .map((p) => ({
         ...p,
-        score: allCats.includes(p.category)
-          ? p.trendScore + 20
-          : p.trendScore,
+        score: allCats.includes(p.category) ? p.trendScore + 20 : p.trendScore,
       }))
       .sort((a, b) => b.score - a.score)
       .slice(0, 10);
@@ -73,11 +71,9 @@ export default function ForYouPage() {
     const genres = profile.entertainment.flatMap(
       (e) => entertainmentToGenre[e] || []
     );
-
     if (genres.length === 0) {
       return movies.sort((a, b) => b.trendScore - a.trendScore).slice(0, 6);
     }
-
     return movies
       .map((m) => ({
         ...m,
@@ -99,7 +95,6 @@ export default function ForYouPage() {
     if (!profile) return editorialPicks.slice(0, 4);
     const cats = profile.interests.flatMap((i) => interestToCategory[i] || []);
     if (cats.length === 0) return editorialPicks.slice(0, 4);
-
     return editorialPicks
       .sort((a, b) => {
         const aMatch = cats.includes(a.category) ? 1 : 0;
@@ -115,16 +110,21 @@ export default function ForYouPage() {
     return (
       <>
         <Header />
-        <main className="max-w-2xl mx-auto px-4 py-20 text-center">
-          <h1 className="text-2xl font-bold mb-3">
-            Personalize your experience
+        <main className="max-w-md mx-auto px-5 py-20 text-center">
+          <h1 className="text-2xl font-bold tracking-tight mb-2">
+            Personalize your feed
           </h1>
-          <p className="text-zinc-400 mb-6">
-            Take a quick quiz so we can show you things you'll actually care about.
+          <p className="text-sm mb-6" style={{ color: "var(--color-text-secondary)" }}>
+            Take a quick quiz so we can show you things you&apos;ll actually care about.
           </p>
           <Link
             href="/quiz"
-            className="inline-block px-8 py-3 bg-amber-500 hover:bg-amber-600 text-black font-semibold rounded-xl transition-colors"
+            className="inline-block px-6 py-2.5 text-sm font-medium transition-opacity"
+            style={{
+              background: "var(--color-text)",
+              color: "var(--color-bg)",
+              borderRadius: "var(--radius-card)",
+            }}
           >
             Start quiz
           </Link>
@@ -136,31 +136,54 @@ export default function ForYouPage() {
   return (
     <>
       <Header />
-      <main className="max-w-[1400px] mx-auto px-4 py-6">
+      <main className="max-w-[1400px] mx-auto px-5 py-8">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold">For You</h1>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+          <h1 className="text-3xl font-bold tracking-tight">For You</h1>
+          <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
             Picks based on your interests and activity
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-6">
-          {/* Main column */}
-          <div className="space-y-8">
-            {/* Editorial picks */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8">
+          {/* Main */}
+          <div className="space-y-10">
+            {/* Editorial */}
             <section>
-              <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                <span className="w-1 h-5 bg-amber-500 rounded-full" />
-                Editor's Picks
-              </h2>
+              <p
+                className="text-[10px] uppercase tracking-[0.15em] mb-4"
+                style={{
+                  color: "var(--color-text-tertiary)",
+                  fontFamily: "var(--font-mono)",
+                }}
+              >
+                01 — Editor&apos;s Picks
+              </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {relevantEditorial.map((pick) => (
                   <a
                     key={pick.id}
                     href={pick.url}
-                    className="group flex gap-3 p-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:border-zinc-400 dark:hover:border-zinc-600 transition-all"
+                    className="group flex gap-3 p-3 transition-colors"
+                    style={{
+                      border: "1px solid var(--color-border)",
+                      borderRadius: "var(--radius-card)",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.borderColor =
+                        "var(--color-border-strong)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.borderColor =
+                        "var(--color-border)")
+                    }
                   >
-                    <div className="w-24 h-24 rounded-lg overflow-hidden shrink-0 bg-zinc-100 dark:bg-zinc-800">
+                    <div
+                      className="w-20 h-20 overflow-hidden shrink-0"
+                      style={{
+                        borderRadius: "var(--radius-sm)",
+                        background: "var(--color-surface-hover)",
+                      }}
+                    >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={pick.image}
@@ -169,18 +192,36 @@ export default function ForYouPage() {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-[10px] font-bold bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-1.5 py-0.5 rounded">
-                          {pick.sourceIcon}
+                      <div className="flex items-center gap-1.5 mb-0.5">
+                        <span
+                          className="text-[10px] font-medium uppercase"
+                          style={{
+                            color: "var(--color-text-tertiary)",
+                            fontFamily: "var(--font-mono)",
+                          }}
+                        >
+                          {pick.source}
                         </span>
-                        <span className="text-[11px] text-zinc-500">{pick.source}</span>
-                        <span className="text-[11px] text-zinc-500">·</span>
-                        <span className="text-[11px] text-zinc-500">{pick.date}</span>
+                        <span
+                          className="text-[10px]"
+                          style={{ color: "var(--color-text-tertiary)" }}
+                        >
+                          · {pick.date}
+                        </span>
                       </div>
-                      <h3 className="text-sm font-semibold text-zinc-900 dark:text-white leading-tight mb-1 line-clamp-2">
+                      <h3
+                        className="text-sm font-medium leading-snug mb-1 line-clamp-2 transition-colors"
+                        style={{ color: "var(--color-text)" }}
+                      >
                         {pick.title}
                       </h3>
-                      <p className="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">
+                      <p
+                        className="text-[11px] line-clamp-2 leading-relaxed"
+                        style={{
+                          color: "var(--color-text-tertiary)",
+                          fontFamily: "var(--font-serif)",
+                        }}
+                      >
                         {pick.summary}
                       </p>
                     </div>
@@ -189,129 +230,239 @@ export default function ForYouPage() {
               </div>
             </section>
 
-            {/* Recommended products */}
+            {/* Products */}
             <section>
-              <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                <span className="w-1 h-5 bg-green-500 rounded-full" />
-                Recommended Products
-              </h2>
+              <p
+                className="text-[10px] uppercase tracking-[0.15em] mb-4"
+                style={{
+                  color: "var(--color-text-tertiary)",
+                  fontFamily: "var(--font-mono)",
+                }}
+              >
+                02 — Recommended Products
+              </p>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                {recommendedProducts.map((p) => (
-                  <ProductCard key={p.id} product={p} />
+                {recommendedProducts.map((p, i) => (
+                  <ProductCard key={p.id} product={p} index={i} />
                 ))}
               </div>
             </section>
 
-            {/* Movies & Series */}
+            {/* Movies */}
             <section>
-              <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                <span className="w-1 h-5 bg-purple-500 rounded-full" />
-                Movies & Series For You
-              </h2>
+              <p
+                className="text-[10px] uppercase tracking-[0.15em] mb-4"
+                style={{
+                  color: "var(--color-text-tertiary)",
+                  fontFamily: "var(--font-mono)",
+                }}
+              >
+                03 — Movies & Series For You
+              </p>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                {recommendedMovies.map((m) => (
-                  <MovieCard key={m.id} item={m} />
+                {recommendedMovies.map((m, i) => (
+                  <MovieCard key={m.id} item={m} index={i} />
                 ))}
               </div>
             </section>
           </div>
 
           {/* Sidebar */}
-          <aside className="space-y-4">
-            {/* Profile summary */}
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4">
-              <h3 className="text-sm font-semibold mb-3">Your Profile</h3>
-              <div className="space-y-2">
-                <div>
-                  <p className="text-[11px] uppercase tracking-wide text-zinc-500 mb-1">Interests</p>
-                  <div className="flex flex-wrap gap-1">
-                    {profile.interests.map((i) => (
-                      <span
-                        key={i}
-                        className="text-xs bg-amber-500/10 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded-full capitalize"
-                      >
-                        {i}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="text-[11px] uppercase tracking-wide text-zinc-500 mb-1">Entertainment</p>
-                  <div className="flex flex-wrap gap-1">
-                    {profile.entertainment.map((e) => (
-                      <span
-                        key={e}
-                        className="text-xs bg-purple-500/10 text-purple-600 dark:text-purple-400 px-2 py-0.5 rounded-full capitalize"
-                      >
-                        {e}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="text-[11px] uppercase tracking-wide text-zinc-500 mb-1">Budget</p>
-                  <span className="text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 px-2 py-0.5 rounded-full capitalize">
-                    {profile.priceRange || "Not set"}
-                  </span>
-                </div>
-              </div>
-              <Link
-                href="/quiz"
-                className="block mt-3 text-xs text-amber-600 dark:text-amber-400 hover:underline"
+          <aside className="hidden lg:block">
+            <div className="sticky top-20 space-y-6">
+              {/* Profile */}
+              <div
+                className="p-4"
+                style={{
+                  border: "1px solid var(--color-border)",
+                  borderRadius: "var(--radius-card)",
+                }}
               >
-                Retake quiz
-              </Link>
-            </div>
+                <p
+                  className="text-[10px] uppercase tracking-[0.15em] mb-3"
+                  style={{
+                    color: "var(--color-text-tertiary)",
+                    fontFamily: "var(--font-mono)",
+                  }}
+                >
+                  Your Profile
+                </p>
+                <div className="space-y-3">
+                  <div>
+                    <p
+                      className="text-[10px] uppercase tracking-[0.12em] mb-1"
+                      style={{
+                        color: "var(--color-text-tertiary)",
+                        fontFamily: "var(--font-mono)",
+                      }}
+                    >
+                      Interests
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      {profile.interests.map((i) => (
+                        <span
+                          key={i}
+                          className="text-[10px] font-medium capitalize px-1.5 py-0.5"
+                          style={{
+                            background: "var(--color-accent-subtle)",
+                            color: "var(--color-accent)",
+                            borderRadius: "var(--radius-sm)",
+                          }}
+                        >
+                          {i}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <p
+                      className="text-[10px] uppercase tracking-[0.12em] mb-1"
+                      style={{
+                        color: "var(--color-text-tertiary)",
+                        fontFamily: "var(--font-mono)",
+                      }}
+                    >
+                      Entertainment
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      {profile.entertainment.map((e) => (
+                        <span
+                          key={e}
+                          className="text-[10px] font-medium capitalize px-1.5 py-0.5"
+                          style={{
+                            background: "var(--color-surface-hover)",
+                            color: "var(--color-text-secondary)",
+                            borderRadius: "var(--radius-sm)",
+                          }}
+                        >
+                          {e}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <p
+                      className="text-[10px] uppercase tracking-[0.12em] mb-1"
+                      style={{
+                        color: "var(--color-text-tertiary)",
+                        fontFamily: "var(--font-mono)",
+                      }}
+                    >
+                      Budget
+                    </p>
+                    <span
+                      className="text-[11px] capitalize"
+                      style={{ color: "var(--color-text-secondary)" }}
+                    >
+                      {profile.priceRange || "Not set"}
+                    </span>
+                  </div>
+                </div>
+                <Link
+                  href="/quiz"
+                  className="block mt-3 text-xs transition-colors"
+                  style={{ color: "var(--color-accent)" }}
+                >
+                  Retake quiz
+                </Link>
+              </div>
 
-            {/* Top music sidebar */}
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4">
-              <h3 className="text-sm font-semibold mb-3">Top Music</h3>
-              <div className="space-y-1.5">
+              {/* Music */}
+              <div>
+                <p
+                  className="text-[10px] uppercase tracking-[0.15em] mb-3"
+                  style={{
+                    color: "var(--color-text-tertiary)",
+                    fontFamily: "var(--font-mono)",
+                  }}
+                >
+                  Top Music
+                </p>
                 {recommendedSongs.map((song, i) => (
                   <a
                     key={song.id}
                     href={song.spotifyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2.5 p-1.5 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+                    className="flex items-center gap-2 py-1.5"
+                    style={{ borderBottom: "1px solid var(--color-border)" }}
                   >
-                    <span className="text-sm font-bold text-zinc-400 w-5 text-right">
-                      {i + 1}
+                    <span
+                      className="text-xs font-medium w-4 text-right"
+                      style={{
+                        color: "var(--color-text-tertiary)",
+                        fontFamily: "var(--font-mono)",
+                      }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
                     </span>
-                    <div className="w-8 h-8 rounded overflow-hidden shrink-0">
+                    <div
+                      className="w-6 h-6 overflow-hidden shrink-0"
+                      style={{ borderRadius: "var(--radius-sm)" }}
+                    >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={song.cover} alt="" className="w-full h-full object-cover" />
+                      <img
+                        src={song.cover}
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs font-medium text-zinc-900 dark:text-white truncate">
+                    <div className="min-w-0">
+                      <p
+                        className="text-xs font-medium truncate"
+                        style={{ color: "var(--color-text)" }}
+                      >
                         {song.title}
                       </p>
-                      <p className="text-[11px] text-zinc-500 truncate">{song.artist}</p>
+                      <p
+                        className="text-[10px] truncate"
+                        style={{ color: "var(--color-text-tertiary)" }}
+                      >
+                        {song.artist}
+                      </p>
                     </div>
                   </a>
                 ))}
               </div>
-            </div>
 
-            {/* More editorial */}
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4">
-              <h3 className="text-sm font-semibold mb-3">More from editors</h3>
-              <div className="space-y-2.5">
-                {editorialPicks.slice(4).map((pick) => (
-                  <a
-                    key={pick.id}
-                    href={pick.url}
-                    className="block group"
-                  >
-                    <div className="flex items-center gap-1.5 mb-0.5">
-                      <span className="text-[10px] font-bold text-zinc-500">{pick.source}</span>
-                      <span className="text-[10px] text-zinc-500">· {pick.date}</span>
-                    </div>
-                    <p className="text-xs font-medium text-zinc-900 dark:text-zinc-200 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors leading-snug">
-                      {pick.title}
-                    </p>
-                  </a>
-                ))}
+              {/* More editorial */}
+              <div>
+                <p
+                  className="text-[10px] uppercase tracking-[0.15em] mb-3"
+                  style={{
+                    color: "var(--color-text-tertiary)",
+                    fontFamily: "var(--font-mono)",
+                  }}
+                >
+                  More from editors
+                </p>
+                <div className="space-y-3">
+                  {editorialPicks.slice(4).map((pick) => (
+                    <a key={pick.id} href={pick.url} className="block group">
+                      <span
+                        className="text-[10px]"
+                        style={{
+                          color: "var(--color-text-tertiary)",
+                          fontFamily: "var(--font-mono)",
+                        }}
+                      >
+                        {pick.source} · {pick.date}
+                      </span>
+                      <p
+                        className="text-xs font-medium leading-snug transition-colors"
+                        style={{ color: "var(--color-text)" }}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.color = "var(--color-accent)")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.color = "var(--color-text)")
+                        }
+                      >
+                        {pick.title}
+                      </p>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </aside>

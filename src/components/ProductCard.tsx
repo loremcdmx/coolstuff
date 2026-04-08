@@ -1,45 +1,89 @@
 import { Product } from "@/data/products";
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+  index = 0,
+}: {
+  product: Product;
+  index?: number;
+}) {
   return (
     <a
       href={product.amazonUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-400 dark:hover:border-zinc-600 transition-all hover:shadow-xl hover:shadow-amber-500/5"
+      className="group block animate-fade-up"
+      style={{
+        animationDelay: `${index * 40}ms`,
+        borderRadius: "var(--radius-card)",
+        overflow: "hidden",
+        border: "1px solid var(--color-border)",
+        background: "var(--color-surface)",
+        transition: "border-color var(--transition-fast)",
+      }}
+      onMouseEnter={(e) =>
+        (e.currentTarget.style.borderColor = "var(--color-border-strong)")
+      }
+      onMouseLeave={(e) =>
+        (e.currentTarget.style.borderColor = "var(--color-border)")
+      }
     >
-      <div className="relative aspect-square bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
+      <div className="relative aspect-square overflow-hidden" style={{ background: "var(--color-surface-hover)" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={product.image}
           alt={product.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-full object-cover transition-opacity duration-[350ms] group-hover:opacity-90"
         />
-        <div className="absolute top-3 right-3 bg-amber-500 text-black text-xs font-bold px-2 py-1 rounded-full">
+        <span
+          className="absolute top-2 right-2 text-[10px] font-medium px-1.5 py-0.5"
+          style={{
+            background: "var(--color-accent)",
+            color: "#fff",
+            fontFamily: "var(--font-mono)",
+            borderRadius: "var(--radius-sm)",
+          }}
+        >
           #{product.trendScore}
-        </div>
+        </span>
         {product.country !== "both" && (
-          <div className="absolute top-3 left-3 bg-black/60 dark:bg-zinc-900/80 text-white text-xs px-2 py-1 rounded-full">
-            {product.country === "mx" ? "MX" : "US"}
-          </div>
+          <span
+            className="absolute top-2 left-2 text-[10px] font-medium px-1.5 py-0.5"
+            style={{
+              background: "rgba(0,0,0,0.6)",
+              color: "#fff",
+              fontFamily: "var(--font-mono)",
+              borderRadius: "var(--radius-sm)",
+            }}
+          >
+            {product.country.toUpperCase()}
+          </span>
         )}
       </div>
-      <div className="p-4">
-        <p className="text-xs text-amber-600 dark:text-amber-400 font-medium mb-1">
+      <div className="p-3">
+        <p
+          className="text-[10px] uppercase tracking-[0.1em] mb-1"
+          style={{ color: "var(--color-accent)", fontFamily: "var(--font-mono)" }}
+        >
           {product.category}
         </p>
-        <h3 className="font-semibold text-zinc-900 dark:text-white text-sm leading-tight mb-2 line-clamp-2">
+        <h3
+          className="text-sm font-medium leading-snug mb-2 line-clamp-2"
+          style={{ color: "var(--color-text)" }}
+        >
           {product.title}
         </h3>
         <div className="flex items-center justify-between">
-          <span className="text-lg font-bold text-zinc-900 dark:text-white">
+          <span className="text-base font-semibold" style={{ color: "var(--color-text)" }}>
             {product.currency === "MXN" ? "$" : "US$"}
             {product.price.toLocaleString()}
           </span>
-          <div className="flex items-center gap-1 text-xs text-zinc-500 dark:text-zinc-400">
-            <span className="text-amber-500 dark:text-amber-400">★</span>
+          <span
+            className="text-[11px]"
+            style={{ color: "var(--color-text-tertiary)", fontFamily: "var(--font-mono)" }}
+          >
             {product.rating} ({(product.reviews / 1000).toFixed(0)}k)
-          </div>
+          </span>
         </div>
       </div>
     </a>
