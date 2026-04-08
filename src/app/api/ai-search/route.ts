@@ -5,9 +5,10 @@ const anthropic = new Anthropic();
 
 export async function POST(req: NextRequest) {
   try {
-    const { query, country } = await req.json();
+    const { query, country, lang = "en" } = await req.json();
 
-    const countryName = country === "mx" ? "México" : "Estados Unidos";
+    const countryName = country === "mx" ? "Mexico" : "United States";
+    const responseLang = lang === "es" ? "Spanish" : "English";
 
     const message = await anthropic.messages.create({
       model: "claude-sonnet-4-20250514",
@@ -15,25 +16,25 @@ export async function POST(req: NextRequest) {
       messages: [
         {
           role: "user",
-          content: `Eres un experto en tendencias de compras y productos. El usuario está en ${countryName} y busca: "${query}"
+          content: `You are a shopping trends expert. The user is in ${countryName} and is looking for: "${query}"
 
-Recomienda 3-5 productos específicos que se pueden comprar en Amazon ${country === "mx" ? "México" : "USA"}. Para cada uno incluye:
-- Nombre del producto
-- Precio aproximado en ${country === "mx" ? "MXN" : "USD"}
-- Por qué es buena opción
-- Rating aproximado
+Recommend 3-5 specific products available on Amazon ${country === "mx" ? "Mexico" : "USA"}. For each include:
+- Product name
+- Approximate price in ${country === "mx" ? "MXN" : "USD"}
+- Why it's a good choice
+- Approximate rating
 
-Sé conciso y directo. Responde en español.`,
+Be concise and direct. Respond in ${responseLang}.`,
         },
       ],
     });
 
     const textBlock = message.content.find((b) => b.type === "text");
-    return NextResponse.json({ result: textBlock?.text || "Sin resultados" });
+    return NextResponse.json({ result: textBlock?.text || "No results" });
   } catch (error) {
     console.error("AI Search error:", error);
     return NextResponse.json(
-      { error: "Error al procesar la búsqueda. Verifica que ANTHROPIC_API_KEY esté configurada." },
+      { error: "Search error. Make sure ANTHROPIC_API_KEY is configured." },
       { status: 500 }
     );
   }

@@ -14,16 +14,16 @@ export type Product = {
 };
 
 export const categories = [
-  "Todo",
+  "All",
   "Tech",
-  "Hogar",
-  "Moda",
-  "Belleza",
-  "Deportes",
+  "Home",
+  "Fashion",
+  "Beauty",
+  "Sports",
   "Gaming",
-  "Libros",
-  "Cocina",
-  "Mascotas",
+  "Books",
+  "Kitchen",
+  "Pets",
 ];
 
 export const products: Product[] = [
@@ -44,7 +44,7 @@ export const products: Product[] = [
   {
     id: "2",
     title: "Stanley Quencher 40oz Tumbler",
-    category: "Hogar",
+    category: "Home",
     price: 899,
     currency: "MXN",
     rating: 4.7,
@@ -58,7 +58,7 @@ export const products: Product[] = [
   {
     id: "3",
     title: "Dyson Airwrap Complete Long",
-    category: "Belleza",
+    category: "Beauty",
     price: 11999,
     currency: "MXN",
     rating: 4.6,
@@ -100,7 +100,7 @@ export const products: Product[] = [
   {
     id: "6",
     title: "Crocs Classic Clog",
-    category: "Moda",
+    category: "Fashion",
     price: 699,
     currency: "MXN",
     rating: 4.5,
@@ -114,7 +114,7 @@ export const products: Product[] = [
   {
     id: "7",
     title: "Freidora de Aire Ninja 6L",
-    category: "Cocina",
+    category: "Kitchen",
     price: 2499,
     currency: "MXN",
     rating: 4.8,
@@ -128,7 +128,7 @@ export const products: Product[] = [
   {
     id: "8",
     title: "Lululemon Belt Bag",
-    category: "Moda",
+    category: "Fashion",
     price: 799,
     currency: "MXN",
     rating: 4.6,
@@ -156,7 +156,7 @@ export const products: Product[] = [
   {
     id: "10",
     title: "Olaplex No. 3 Hair Perfector",
-    category: "Belleza",
+    category: "Beauty",
     price: 549,
     currency: "MXN",
     rating: 4.5,
@@ -170,7 +170,7 @@ export const products: Product[] = [
   {
     id: "11",
     title: "Yoga Mat Extra Grueso",
-    category: "Deportes",
+    category: "Sports",
     price: 459,
     currency: "MXN",
     rating: 4.4,
@@ -184,7 +184,7 @@ export const products: Product[] = [
   {
     id: "12",
     title: "Cama para Perro Ortopedica",
-    category: "Mascotas",
+    category: "Pets",
     price: 1299,
     currency: "MXN",
     rating: 4.6,
@@ -212,7 +212,7 @@ export const products: Product[] = [
   {
     id: "14",
     title: "Atomic Habits - James Clear",
-    category: "Libros",
+    category: "Books",
     price: 279,
     currency: "MXN",
     rating: 4.8,
@@ -226,7 +226,7 @@ export const products: Product[] = [
   {
     id: "15",
     title: "Robot Aspiradora Roomba j7+",
-    category: "Hogar",
+    category: "Home",
     price: 8499,
     currency: "MXN",
     rating: 4.5,
@@ -241,7 +241,7 @@ export const products: Product[] = [
   {
     id: "16",
     title: "Instant Pot Duo Plus 6Qt",
-    category: "Cocina",
+    category: "Kitchen",
     price: 89,
     currency: "USD",
     rating: 4.7,
@@ -255,7 +255,7 @@ export const products: Product[] = [
   {
     id: "17",
     title: "Birkenstocks Arizona",
-    category: "Moda",
+    category: "Fashion",
     price: 110,
     currency: "USD",
     rating: 4.6,
@@ -269,7 +269,7 @@ export const products: Product[] = [
   {
     id: "18",
     title: "Theragun Mini Massage Gun",
-    category: "Deportes",
+    category: "Sports",
     price: 149,
     currency: "USD",
     rating: 4.5,

@@ -1,9 +1,15 @@
+"use client";
+
 import { Movie, Song } from "@/data/entertainment";
+import { useApp } from "@/app/providers";
+import { t } from "@/data/i18n";
 
 export function MovieCard({ item }: { item: Movie }) {
+  const { lang } = useApp();
+
   return (
-    <div className="group bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-600 transition-all">
-      <div className="relative aspect-[2/3] bg-zinc-800 overflow-hidden">
+    <div className="group bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-400 dark:hover:border-zinc-600 transition-all">
+      <div className="relative aspect-[2/3] bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={item.poster}
@@ -21,34 +27,34 @@ export function MovieCard({ item }: { item: Movie }) {
                 : "bg-blue-500 text-white"
             }`}
           >
-            {item.type === "series" ? "Serie" : "Película"}
+            {item.type === "series" ? t(lang, "series") : t(lang, "movie")}
           </span>
         </div>
       </div>
       <div className="p-4">
-        <h3 className="font-semibold text-white text-sm leading-tight mb-2">
+        <h3 className="font-semibold text-zinc-900 dark:text-white text-sm leading-tight mb-2">
           {item.title}
         </h3>
-        <p className="text-xs text-zinc-400 mb-3 line-clamp-2">
+        <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-3 line-clamp-2">
           {item.description}
         </p>
         <div className="flex flex-wrap gap-1 mb-3">
           {item.genre.map((g) => (
             <span
               key={g}
-              className="text-xs bg-zinc-800 text-zinc-300 px-2 py-0.5 rounded-full"
+              className="text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 px-2 py-0.5 rounded-full"
             >
               {g}
             </span>
           ))}
         </div>
-        <div className="border-t border-zinc-800 pt-3">
-          <p className="text-xs text-zinc-500 mb-1">Dónde ver:</p>
+        <div className="border-t border-zinc-200 dark:border-zinc-800 pt-3">
+          <p className="text-xs text-zinc-500 mb-1">{t(lang, "whereToWatch")}</p>
           <div className="flex flex-wrap gap-1">
             {item.whereToWatch.map((w) => (
               <span
                 key={w}
-                className="text-xs bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded-full"
+                className="text-xs bg-amber-500/10 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded-full"
               >
                 {w}
               </span>
@@ -66,12 +72,12 @@ export function SongCard({ song, index }: { song: Song; index: number }) {
       href={song.spotifyUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-4 p-3 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-zinc-600 transition-all group"
+      className="flex items-center gap-4 p-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:border-zinc-400 dark:hover:border-zinc-600 transition-all group"
     >
-      <span className="text-2xl font-bold text-zinc-600 w-8 text-right">
+      <span className="text-2xl font-bold text-zinc-300 dark:text-zinc-600 w-8 text-right">
         {index + 1}
       </span>
-      <div className="w-12 h-12 rounded-lg overflow-hidden bg-zinc-800 shrink-0">
+      <div className="w-12 h-12 rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-800 shrink-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={song.cover}
@@ -80,12 +86,14 @@ export function SongCard({ song, index }: { song: Song; index: number }) {
         />
       </div>
       <div className="flex-1 min-w-0">
-        <h4 className="font-semibold text-white text-sm truncate">
+        <h4 className="font-semibold text-zinc-900 dark:text-white text-sm truncate">
           {song.title}
         </h4>
-        <p className="text-xs text-zinc-400 truncate">{song.artist}</p>
+        <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate">
+          {song.artist}
+        </p>
       </div>
-      <span className="text-xs bg-zinc-800 text-zinc-400 px-2 py-1 rounded-full shrink-0">
+      <span className="text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 px-2 py-1 rounded-full shrink-0">
         {song.genre}
       </span>
     </a>

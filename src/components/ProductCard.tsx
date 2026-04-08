@@ -6,9 +6,9 @@ export default function ProductCard({ product }: { product: Product }) {
       href={product.amazonUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-600 transition-all hover:shadow-xl hover:shadow-amber-500/5"
+      className="group bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-400 dark:hover:border-zinc-600 transition-all hover:shadow-xl hover:shadow-amber-500/5"
     >
-      <div className="relative aspect-square bg-zinc-800 overflow-hidden">
+      <div className="relative aspect-square bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={product.image}
@@ -19,25 +19,25 @@ export default function ProductCard({ product }: { product: Product }) {
           #{product.trendScore}
         </div>
         {product.country !== "both" && (
-          <div className="absolute top-3 left-3 bg-zinc-900/80 text-xs px-2 py-1 rounded-full">
+          <div className="absolute top-3 left-3 bg-black/60 dark:bg-zinc-900/80 text-white text-xs px-2 py-1 rounded-full">
             {product.country === "mx" ? "MX" : "US"}
           </div>
         )}
       </div>
       <div className="p-4">
-        <p className="text-xs text-amber-400 font-medium mb-1">
+        <p className="text-xs text-amber-600 dark:text-amber-400 font-medium mb-1">
           {product.category}
         </p>
-        <h3 className="font-semibold text-white text-sm leading-tight mb-2 line-clamp-2">
+        <h3 className="font-semibold text-zinc-900 dark:text-white text-sm leading-tight mb-2 line-clamp-2">
           {product.title}
         </h3>
         <div className="flex items-center justify-between">
-          <span className="text-lg font-bold text-white">
+          <span className="text-lg font-bold text-zinc-900 dark:text-white">
             {product.currency === "MXN" ? "$" : "US$"}
             {product.price.toLocaleString()}
           </span>
-          <div className="flex items-center gap-1 text-xs text-zinc-400">
-            <span className="text-amber-400">★</span>
+          <div className="flex items-center gap-1 text-xs text-zinc-500 dark:text-zinc-400">
+            <span className="text-amber-500 dark:text-amber-400">★</span>
             {product.rating} ({(product.reviews / 1000).toFixed(0)}k)
           </div>
         </div>
