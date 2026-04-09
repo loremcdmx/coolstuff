@@ -1,4 +1,14 @@
+"use client";
+
 import { Product } from "@/data/products";
+import { useApp } from "@/app/providers";
+
+function getAmazonSearchUrl(title: string, country: "mx" | "us") {
+  const query = encodeURIComponent(title);
+  return country === "mx"
+    ? `https://www.amazon.com.mx/s?k=${query}`
+    : `https://www.amazon.com/s?k=${query}`;
+}
 
 export default function ProductCard({
   product,
@@ -7,9 +17,16 @@ export default function ProductCard({
   product: Product;
   index?: number;
 }) {
+  const { country } = useApp();
+
+  // Use the user's selected country for "both" products,
+  // otherwise use the product's own country
+  const linkCountry = product.country === "both" ? country : product.country;
+  const href = getAmazonSearchUrl(product.title, linkCountry);
+
   return (
     <a
-      href={product.amazonUrl}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       className="group block animate-fade-up"
