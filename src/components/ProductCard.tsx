@@ -73,6 +73,24 @@ export default function ProductCard({
         >
           {product.title}
         </h3>
+        {product.badges && product.badges.length > 0 && (
+          <div className="flex flex-wrap gap-1 mb-2">
+            {product.badges.slice(0, 2).map((badge) => (
+              <span
+                key={badge}
+                className="text-[9px] font-medium leading-tight px-1.5 py-0.5"
+                style={{
+                  background: "var(--color-surface-hover)",
+                  color: "var(--color-text-secondary)",
+                  borderRadius: "var(--radius-sm)",
+                  fontFamily: "var(--font-mono)",
+                }}
+              >
+                {badge}
+              </span>
+            ))}
+          </div>
+        )}
         <div className="flex items-center justify-between">
           <span className="text-base font-semibold" style={{ color: "var(--color-text)" }}>
             {product.currency === "MXN" ? "$" : "US$"}

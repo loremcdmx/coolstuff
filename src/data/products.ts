@@ -13,6 +13,7 @@ export type Product = {
   trendScore: number;
   amazonUrl: string;
   country: "mx" | "us" | "both";
+  badges: string[];
 };
 
 export const categories = [

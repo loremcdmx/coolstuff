@@ -11,7 +11,8 @@
     "trending": true,
     "trendScore": 98,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["Wirecutter #1 Pick 2026", "Best ANC Earbuds — The Verge", "#1 Best Seller on Amazon"]
   },
   {
     "id": "2",
@@ -25,7 +26,8 @@
     "trending": true,
     "trendScore": 95,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["TikTok Viral 2024–2026", "GQ Best Water Bottles", "45k+ Amazon Reviews"]
   },
   {
     "id": "3",
@@ -39,7 +41,8 @@
     "trending": true,
     "trendScore": 92,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["Allure Best of Beauty 2025", "NYT Wirecutter Top Pick", "Red Dot Design Award"]
   },
   {
     "id": "4",
@@ -53,7 +56,8 @@
     "trending": true,
     "trendScore": 99,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["The Verge — Editor's Choice", "Most Anticipated Console 2026", "IGN 9.5/10"]
   },
   {
     "id": "5",
@@ -67,7 +71,8 @@
     "trending": true,
     "trendScore": 88,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["Wirecutter Best E-Reader", "Amazon's Choice", "CNET Editor's Choice"]
   },
   {
     "id": "6",
@@ -81,7 +86,8 @@
     "trending": true,
     "trendScore": 85,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["95k+ Amazon Reviews", "GQ Shoe of the Decade", "TikTok Most Worn 2025"]
   },
   {
     "id": "7",
@@ -95,7 +101,8 @@
     "trending": true,
     "trendScore": 91,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "mx"
+    "country": "mx",
+    "badges": ["Wired Best Air Fryer 2026", "Profeco Recomendado", "#1 en Amazon MX Cocina"]
   },
   {
     "id": "8",
@@ -109,7 +116,8 @@
     "trending": true,
     "trendScore": 87,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["TikTok Viral Accessory", "Cosmopolitan Best Bags 2025", "Amazon Most Wished For"]
   },
   {
     "id": "9",
@@ -123,7 +131,8 @@
     "trending": true,
     "trendScore": 90,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["IGN Editor's Choice", "The Verge Best Console Value", "TGA Best Hardware 2024"]
   },
   {
     "id": "10",
@@ -137,7 +146,8 @@
     "trending": true,
     "trendScore": 82,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["Allure Best of Beauty Hall of Fame", "NYT Dermatologist Approved", "62k+ Reviews"]
   },
   {
     "id": "11",
@@ -151,7 +161,8 @@
     "trending": true,
     "trendScore": 78,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "mx"
+    "country": "mx",
+    "badges": ["Amazon's Choice MX", "#1 Tapetes de Yoga en Amazon", "33k+ Reviews"]
   },
   {
     "id": "12",
@@ -165,7 +176,8 @@
     "trending": true,
     "trendScore": 76,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "mx"
+    "country": "mx",
+    "badges": ["Wirecutter Best Dog Bed", "Vet Recommended", "Amazon's Choice MX"]
   },
   {
     "id": "13",
@@ -179,7 +191,8 @@
     "trending": true,
     "trendScore": 86,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["Tom's Guide Best Budget Tablet", "PCMag Editor's Choice", "CES Innovation Award 2026"]
   },
   {
     "id": "14",
@@ -193,7 +206,8 @@
     "trending": true,
     "trendScore": 84,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["NYT #1 Bestseller", "120k+ Reviews", "Bill Gates Recommended"]
   },
   {
     "id": "15",
@@ -207,7 +221,8 @@
     "trending": true,
     "trendScore": 83,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["Wirecutter Best Robot Vacuum", "Good Housekeeping Seal", "CNET 4.5/5"]
   },
   {
     "id": "16",
@@ -221,7 +236,8 @@
     "trending": true,
     "trendScore": 88,
     "amazonUrl": "https://amazon.com",
-    "country": "us"
+    "country": "us",
+    "badges": ["145k+ Amazon Reviews", "Wirecutter Top Multi-Cooker", "Amazon #1 Best Seller"]
   },
   {
     "id": "17",
@@ -235,7 +251,8 @@
     "trending": true,
     "trendScore": 81,
     "amazonUrl": "https://amazon.com",
-    "country": "us"
+    "country": "us",
+    "badges": ["GQ Best Sandals 2026", "Podiatrist Recommended", "Vogue Staple Pick"]
   },
   {
     "id": "18",
@@ -249,7 +266,8 @@
     "trending": true,
     "trendScore": 79,
     "amazonUrl": "https://amazon.com",
-    "country": "us"
+    "country": "us",
+    "badges": ["GQ Fitness Award", "Runner's World Editor's Pick", "NBA Player Approved"]
   },
   {
     "id": "19",
@@ -263,7 +281,8 @@
     "trending": true,
     "trendScore": 89,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["Wirecutter Best for Android", "What Hi-Fi? 5 Stars", "CES Innovation Award 2026"]
   },
   {
     "id": "20",
@@ -277,7 +296,8 @@
     "trending": true,
     "trendScore": 86,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["NYT Dermatologist #1 Pick", "142k+ Reviews", "National Eczema Association Seal"]
   },
   {
     "id": "21",
@@ -291,7 +311,8 @@
     "trending": true,
     "trendScore": 84,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["Toy of the Year Finalist 2026", "LEGO 18+ Collectors Line", "The Verge Best Gift"]
   },
   {
     "id": "22",
@@ -305,7 +326,8 @@
     "trending": true,
     "trendScore": 83,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["Runner's World Editor's Choice", "GQ Best Running Shoe 2026", "Marathon World Record Shoe"]
   },
   {
     "id": "23",
@@ -319,7 +341,8 @@
     "trending": true,
     "trendScore": 77,
     "amazonUrl": "https://amazon.com",
-    "country": "us"
+    "country": "us",
+    "badges": ["Wirecutter Best Sunrise Alarm", "Sleep Foundation Approved", "Huberman Lab Mentioned"]
   },
   {
     "id": "24",
@@ -333,7 +356,8 @@
     "trending": true,
     "trendScore": 88,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["The Verge Best VR Value", "Tom's Guide Editor's Choice", "MKBHD Recommended"]
   },
   {
     "id": "25",
@@ -347,7 +371,8 @@
     "trending": true,
     "trendScore": 80,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["NYT Bestseller", "98k+ Reviews", "Financial Times Book of the Year"]
   },
   {
     "id": "26",
@@ -361,7 +386,8 @@
     "trending": true,
     "trendScore": 82,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["Wirecutter Best Portable Speaker", "What Hi-Fi? 4.5/5", "54k+ Amazon Reviews"]
   },
   {
     "id": "27",
@@ -375,7 +401,8 @@
     "trending": true,
     "trendScore": 74,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["Vet #1 Recommended Brush", "67k+ Reviews", "AKC Endorsed"]
   },
   {
     "id": "28",
@@ -389,7 +416,8 @@
     "trending": true,
     "trendScore": 75,
     "amazonUrl": "https://amazon.com",
-    "country": "us"
+    "country": "us",
+    "badges": ["Bon Appétit Test Kitchen Staple", "186k+ Reviews", "Wirecutter Best Cast Iron"]
   },
   {
     "id": "29",
@@ -403,7 +431,8 @@
     "trending": true,
     "trendScore": 91,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["CNET Editor's Choice", "Best Smartwatch — Tom's Guide", "FDA Cleared Health Features"]
   },
   {
     "id": "30",
@@ -417,7 +446,8 @@
     "trending": false,
     "trendScore": 70,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["73k+ Reviews", "BPA-Free Pioneer", "REI Staff Pick"]
   },
   {
     "id": "31",
@@ -431,7 +461,8 @@
     "trending": true,
     "trendScore": 76,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["Oprah's Favorite Things", "TIME Best Inventions", "Wired Recommends"]
   },
   {
     "id": "32",
@@ -445,6 +476,7 @@
     "trending": true,
     "trendScore": 81,
     "amazonUrl": "https://amazon.com.mx",
-    "country": "both"
+    "country": "both",
+    "badges": ["GQ Sneaker of the Year Nominee", "Hypebeast Top 10 2025", "Vogue Street Style Pick"]
   }
 ]
