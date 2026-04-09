@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "update-products": "node scripts/update-products.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.86.1",

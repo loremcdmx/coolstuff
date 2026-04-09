@@ -36,10 +36,15 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${grotesk.variable} ${serif.variable} ${mono.variable} h-full`}
+      style={{ backgroundColor: "#111110", colorScheme: "dark" }}
     >
       <body
         className="min-h-full flex flex-col"
-        style={{ fontFamily: "var(--font-grotesk), system-ui, sans-serif" }}
+        style={{
+          fontFamily: "var(--font-grotesk), system-ui, sans-serif",
+          backgroundColor: "var(--color-bg)",
+          color: "var(--color-text)",
+        }}
       >
         <Providers>{children}</Providers>
       </body>
