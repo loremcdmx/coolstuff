@@ -19,6 +19,12 @@ const CATEGORIES = [
   "Pets",
 ];
 
+function hasAnthropicCredentials() {
+  return Boolean(
+    process.env.ANTHROPIC_API_KEY || process.env.ANTHROPIC_AUTH_TOKEN
+  );
+}
+
 async function updateProducts() {
   const client = new Anthropic();
   const existing = JSON.parse(readFileSync(PRODUCTS_PATH, "utf-8"));
@@ -181,6 +187,13 @@ Return ONLY a valid JSON array.`,
 async function main() {
   console.log("--- Product Catalog Update ---");
   console.log(new Date().toISOString());
+
+  if (!hasAnthropicCredentials()) {
+    console.log(
+      "ANTHROPIC_API_KEY/ANTHROPIC_AUTH_TOKEN is not configured; skipping catalog update."
+    );
+    return;
+  }
 
   const changed = await updateProducts();
   if (changed) {
